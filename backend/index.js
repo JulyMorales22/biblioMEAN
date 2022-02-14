@@ -1,12 +1,16 @@
 import express from "express";
 import cors from "cors";//reglas de seguridad porque se va a consumir APIS, etc 
 import db from "./db/db.js";
+import roleRoutes from "./routes/roleRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();//app sera nuestro server
 app.use(express.json());
 app.use(cors());
+app.use("/api/role", roleRoutes);
+app.use("/api/user", userRoutes);
 
 //para decirle al OS que aqui va a trabajar
 app.listen(process.env.PORT,() =>
