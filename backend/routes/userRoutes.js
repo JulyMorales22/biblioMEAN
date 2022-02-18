@@ -5,6 +5,7 @@ import roleVali from "../middleware/roleValidate.js";
 const router = express.Router();
 
 router.post("/registerUser", userVali.existingUser, roleVali.existingRole, userController.registerUser)
+router.post("/login", userController.login)
 
 router.get("/listuser", userController.listUser)
 router.get("/listFilterUser/:name?", userController.listFilterUser)
