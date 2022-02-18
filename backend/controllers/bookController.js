@@ -3,8 +3,8 @@ import book from "../models/book.js";
 
 const registerBook = async (req, res) => {
   if (
-    !req.body.name ||
-    !req.body.author ||
+    // !req.body.name ||
+    // !req.body.author ||
     !req.body.description ||
     !req.body.category ||
     !req.body.location ||

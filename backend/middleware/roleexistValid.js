@@ -1,14 +1,18 @@
 import role from "../models/role.js";
 
-const existingRole = async (req, res, next) =>{
-    if(!req.body.name) return res.status(400).send({ message: "incomplete data"})
+const existingRole = async (req, res, next) => {
+  if (!req.body.name || !req.body.description)
+    return res.status(400).send({ message: "incomplete data" });
 
-    const existingRole  = await role.find( { name: req.body.name})
+  const existingNameRole = await role.findOne({ name: req.body.name });
+  const existingDescription = await role.findOne({
+    description: req.body.description
+  });
 
-    if(existingRole)
-    return res.status(400).send({ message: "the role is already registered"})
+  if (existingNameRole && existingDescription)
+    return res.status(400).send({ message: "the role is already registered" });
 
-    next();
-}
+  next();
+};
 
-export default { existingRole};
+export default { existingRole };

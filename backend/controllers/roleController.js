@@ -1,8 +1,8 @@
 import role from "../models/role.js";
 
 const registerRole = async (req, res) => {
-  if (!req.body.name || !req.body.description)
-    return res.status(400).send({ message: "Incomplete data" });
+  // if (!req.body.name || !req.body.description)
+  //   return res.status(400).send({ message: "Incomplete data" });
 
   const schema = new role({
     name: req.body.name,
