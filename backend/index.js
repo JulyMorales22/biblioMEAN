@@ -3,6 +3,7 @@ import cors from "cors";//reglas de seguridad porque se va a consumir APIS, etc
 import db from "./db/db.js";
 import roleRoutes from "./routes/roleRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import bookRoutes from "./routes/bookRoutes.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/api/role", roleRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/book", bookRoutes);
 
 //para decirle al OS que aqui va a trabajar
 app.listen(process.env.PORT,() =>
