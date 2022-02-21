@@ -7,14 +7,7 @@ const registerUser = async (req, res) => {
   if (!req.body.name || !req.body.password)
     return res.status(400).send({ message: "Incomplete data" });
 
-  // const existingUser = await user.findOne({ email: req.body.email });
-
-  // if (existingUser)
-  //   return res.status(400).send({ message: "The user is already registered" });
   const passHash = await bcrypt.hash(req.body.password, 10);
-
-  // const roleId = await role.findOne({ name: "pruebabiblioMean" });
-  // if (!roleId) return res.status(500).send({ message: "No role was assigned" });
 
   const userSchema = new user({
     name: req.body.name,
@@ -44,7 +37,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-const listUser = async (req, res) => {
+const listUserAdmin = async (req, res) => {
   let users = await user.find();
 
   return users.length === 0
@@ -54,7 +47,9 @@ const listUser = async (req, res) => {
 
 const listFilterUser = async (req, res) => {
   let usersfilter = await user
-    .find({ name: new RegExp(req.params["name"]) })
+    .find({
+      $and: [{ name: new RegExp(req.params["name"]) }, { dbStatus: "true" }],
+    })
     .populate("role")
     .exec();
   return usersfilter.length === 0
@@ -62,13 +57,16 @@ const listFilterUser = async (req, res) => {
     : res.status(200).send({ usersfilter });
 };
 
-const login = async (req, res) =>{
-  const userLogin = await user.findOne({ email: req.body.email});
-  if(!userLogin) return res.status(400).send({ message: "Wrong email or password"})
-  if(!userLogin.dbStatus) return res.status(400).send({message: "user no found"})
+const login = async (req, res) => {
+  const userLogin = await user.findOne({ email: req.body.email });
+  if (!userLogin)
+    return res.status(400).send({ message: "Wrong email or password" });
+  if (!userLogin.dbStatus)
+    return res.status(400).send({ message: "user no found" });
 
-  const passHash = await bcrypt.compare(req.body.password, userLogin.password)
-  if(!passHash) return res.status(400).send({ message: "Wrong email or password "})
+  const passHash = await bcrypt.compare(req.body.password, userLogin.password);
+  if (!passHash)
+    return res.status(400).send({ message: "Wrong email or password " });
   try {
     return res.status(200).json({
       token: jwt.sign(
@@ -84,7 +82,42 @@ const login = async (req, res) =>{
   } catch (e) {
     return res.status(500).send({ message: "Login error" });
   }
+};
 
-}
+const deleteUser = async (req, res) => {
+  if (!req.params["_id"])
+    return res.status(400).send({ message: "Incomplete data" });
 
-export default { registerUser, listUser, listFilterUser, login };
+  const users = await user.findByIdAndUpdate(req.params["_id"], {
+    dbStatus: false,
+  });
+
+  return !users
+    ? res.status(400).send({ message: "Error deleting user" })
+    : res.status(200).send({ message: "Successfully deleted user" });
+};
+
+const updateUserAdmin = async (req, res) =>{
+  if(!req.body._id || !req.body.name || !req.body.role || !req.body.email) return res.status(400).send({ message: "Incomplete data"})
+  
+  let pass = "";
+
+  if (!req.body.password) {
+    const findUser = await user.findOne({ email: req.body.email});
+    pass = findUser.password;
+  } else {
+    pass = await bcrypt.hash(req.body.password, 10);
+  }
+
+  const editUser = await user.findByIdAndUpdate(req.body._id,{
+    name: req.body.name,
+    password : pass,
+    role : req.body.role
+  })
+
+  return !editUser? res.status(500).send({ message: "Error editing  user"}): res.status(200).send({ message: "User updated"})
+};
+
+
+
+export default { registerUser, listUserAdmin, listFilterUser, login , deleteUser, updateUserAdmin};

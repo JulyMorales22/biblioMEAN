@@ -8,6 +8,7 @@ const bookSchema = new mongoose.Schema({
     location:String, //en que parte de la biblioteca esta localizado
     cantidad: Number,
     registerDate: {type:Date, default: Date.now}, 
+    dbStatus : Boolean
 })
 
 const book = mongoose.model("books", bookSchema);

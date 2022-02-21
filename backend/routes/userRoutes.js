@@ -7,7 +7,9 @@ const router = express.Router();
 router.post("/registerUser", userVali.existingUser, roleVali.existingRole, userController.registerUser)
 router.post("/login", userController.login)
 
-router.get("/listuser", userController.listUser)
+router.get("/listuserAdmin", userController.listUserAdmin)
 router.get("/listFilterUser/:name?", userController.listFilterUser)
+router.put("/deleteUser/:_id", userController.deleteUser )
+router.put("/updateUserAdmin", userController.updateUserAdmin)
 
 export default  router ;

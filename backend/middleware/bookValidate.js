@@ -1,3 +1,4 @@
+// verificar la existencia del libro para poder registrarlo
 import book from "../models/book.js";
 
 const existingBook = async (req, res, next) => {
@@ -10,6 +11,7 @@ const existingBook = async (req, res, next) => {
 
   if (existingNameBook && existingAuthorBook)
     return res.status(400).send({ message: "The book is already registered" });
+
 
     next();
 };
