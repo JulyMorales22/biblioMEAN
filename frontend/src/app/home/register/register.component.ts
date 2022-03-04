@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
       this.registerData = {};
     } else {
       this._userService.registerUser(this.registerData).subscribe(
-        (v) =>{
+        (v) => {
           console.log(v);
           localStorage.setItem('token', v.token);
           this._router.navigate(['/registerBook']);
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
           this.openSnackBarSuccesfull();
           this.registerData = {};
         },
-        (e) =>{
+        (e) => {
           console.log(e);
           this.message = e.error;
           this.openSnackBarError();
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
     }
   }
   openSnackBarSuccesfull() {
-    this._snackBar.open(this.message, 'X',{
+    this._snackBar.open(this.message, 'X', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: this.durationInSeconds,
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   openSnackBarError() {
-    this._snackBar.open(this.message, 'X',{
+    this._snackBar.open(this.message, 'X', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: this.durationInSeconds,

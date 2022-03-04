@@ -14,24 +14,23 @@ import { RegisterRoleComponent } from './admin/register-role/register-role.compo
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 
-import { RoleService  } from "./services/role.service";
-import { UserService } from "./services/user.service";
-import { TokenInterceptorService } from "./services/token-interceptor.service";
-import { AuthGuard } from "./guard/auth.guard";
+import { RoleService } from './services/role.service';
+import { UserService } from './services/user.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { AuthGuard } from './guard/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatButtonModule } from "@angular/material/button";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegisterBookComponent } from './library/register-book/register-book.component';
 import { ListBookComponent } from './library/list-book/list-book.component';
-
 
 @NgModule({
   declarations: [
@@ -63,7 +62,7 @@ import { ListBookComponent } from './library/list-book/list-book.component';
     MatInputModule,
     MatSnackBarModule,
   ],
-  providers: [ RoleService, UserService, TokenInterceptorService, AuthGuard],
-  bootstrap: [AppComponent]
+  providers: [RoleService, UserService, TokenInterceptorService, AuthGuard],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
