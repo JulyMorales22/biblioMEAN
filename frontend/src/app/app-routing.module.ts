@@ -8,6 +8,9 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
+import { ListBookComponent } from './library/list-book/list-book.component';
+import { RegisterBookComponent } from './library/register-book/register-book.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -20,20 +23,33 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'registerBook',
+    component: RegisterBookComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'listBook',
+    component: ListBookComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'signUp',
     component: RegisterComponent,
   },
   {
     path: 'listUser',
     component: ListUserComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'registerUser',
     component: RegisterUserComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'updateUser',
     component: UpdateUserComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'listRole',
@@ -42,15 +58,17 @@ const routes: Routes = [
   {
     path: 'registerRole',
     component: RegisterRoleComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'updateRole',
     component: UpdateRoleComponent,
-  }
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

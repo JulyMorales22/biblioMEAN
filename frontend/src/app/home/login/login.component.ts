@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
       this._userService.login(this.loginData).subscribe(
         (v) =>{
           localStorage.setItem('token', v.token);
-          this._router.navigate(['/listUser']);
+          this._router.navigate(['/listBook']);
         },
         (e) =>{
-          this.message = e.error;
+          this.message = e.error.message;
           this.openSnackBarError();
         }
       );

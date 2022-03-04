@@ -29,6 +29,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { RegisterBookComponent } from './library/register-book/register-book.component';
+import { ListBookComponent } from './library/list-book/list-book.component';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     UpdateUserComponent,
     RegisterRoleComponent,
     ListRoleComponent,
-    UpdateRoleComponent
+    UpdateRoleComponent,
+    RegisterBookComponent,
+    ListBookComponent,
   ],
   imports: [
     BrowserModule,
