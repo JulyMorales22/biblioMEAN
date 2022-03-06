@@ -6,7 +6,7 @@ const bookSchema = new mongoose.Schema({
     description:String, // breve resumen del libro
     category:String, 
     location:String, //en que parte de la biblioteca esta localizado
-    cantidad: Number,
+    quantity: Number,
     registerDate: {type:Date, default: Date.now}, 
     dbStatus : Boolean
 })

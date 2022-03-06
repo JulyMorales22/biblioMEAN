@@ -9,7 +9,7 @@ const registerBook = async (req, res) => {
     !req.body.description ||
     !req.body.category ||
     !req.body.location ||
-    !req.body.cantidad
+    !req.body.quantity
   )
     return res.status(400).send({ message: "Incomplete Data" });
 
@@ -19,7 +19,7 @@ const registerBook = async (req, res) => {
     description: req.body.description,
     category: req.body.category,
     location: req.body.location,
-    cantidad: req.body.cantidad,
+    quantity: req.body.quantity,
     dbStatus:true
   });
 
@@ -54,7 +54,7 @@ const deleteBook = async (req, res) =>{
 };
 
 const updateBook = async (req, res) =>{
-  if( !req.body._id ||!req.body.name || !req.body.author || !req.body.description || !req.body.category || !req.body.location ||!req.body.cantidad) return res.status(400).send({ message: "Incomplete data"})
+  if( !req.body._id ||!req.body.name || !req.body.author || !req.body.description || !req.body.category || !req.body.location ||!req.body.quantity) return res.status(400).send({ message: "Incomplete data"})
 
   const editBook = await book.findOneAndUpdate(req.body._id ,{
     name : req.body.name,
@@ -62,7 +62,7 @@ const updateBook = async (req, res) =>{
     description: req.body.description,
     category: req.body.category,
     location: req.body.location,
-    cantidad: req.body.cantidad
+    quantity: req.body.quantity
   })
 
   return !editBook? res.status(500).send({ message: "Error editing book"}): res.status(200).send({ message: "Book updated"})

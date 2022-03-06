@@ -1,1 +1,62 @@
-<p>register-book works!</p>
+<div class="form">
+  <mat-card class="card">
+    <mat-card-title> Register Book</mat-card-title>
+    <mat-card-content>
+      <div class="container">
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.name"
+            matInput
+            placeholder="Name Book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.author"
+            matInput
+            placeholder="Author the book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.description"
+            matInput
+            placeholder="Description the book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.category"
+            matInput
+            placeholder="Category the book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.location"
+            matInput
+            placeholder="Location the book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.quantity"
+            matInput
+            placeholder="quantity the book"
+            required
+          />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="registerBook()" class="button" mat-raised-button>
+        Register Book
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -16,12 +16,13 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 
 import { RoleService } from './services/role.service';
 import { UserService } from './services/user.service';
+import { BookService } from './services/book.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthGuard } from './guard/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -62,7 +63,17 @@ import { ListBookComponent } from './library/list-book/list-book.component';
     MatInputModule,
     MatSnackBarModule,
   ],
-  providers: [RoleService, UserService, TokenInterceptorService, AuthGuard],
+  providers: [
+    RoleService,
+    UserService,
+    BookService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+    AuthGuard,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
